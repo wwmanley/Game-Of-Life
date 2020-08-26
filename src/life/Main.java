@@ -8,19 +8,12 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner reader = new Scanner(System.in);
-        String[] input = reader.nextLine().split(" ");
-        int N = Integer.parseInt(input[0]);
-        int S = Integer.parseInt(input[1]);
-        int M = Integer.parseInt(input[2]);
+        int sizeOfArray = reader.nextInt();
+        int seed = reader.nextInt();
+        int numberOfGenerations = reader.nextInt();
 
-        Grid grid = new Grid(N, S, M);
-
-        grid.initialGame();
-        for (int i = 0; i < M; i++) {
-            grid.generations();
-        }
-
-        grid.printBoard(grid.initialGrid);
+        Universe universe = new Universe(sizeOfArray, seed);
+        universe.generateGame(numberOfGenerations);
 
     }
 }
