@@ -3,15 +3,24 @@ package life;
 import java.util.Scanner;
 import java.util.Random;
 
-/*
-CREATE GRID CLASS TOMORROW
- */
 
 public class Main {
     public static void main(String[] args) {
 
-        Grid grid = new Grid();
-        grid.newGame();
+        Scanner reader = new Scanner(System.in);
+        String[] input = reader.nextLine().split(" ");
+        int N = Integer.parseInt(input[0]);
+        int S = Integer.parseInt(input[1]);
+        int M = Integer.parseInt(input[2]);
+
+        Grid grid = new Grid(N, S, M);
+
+        grid.initialGame();
+        for (int i = 0; i < M; i++) {
+            grid.generations();
+        }
+
+        grid.printBoard(grid.initialGrid);
 
     }
 }
