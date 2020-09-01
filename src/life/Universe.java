@@ -1,13 +1,16 @@
 package life;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 
-public class Universe {
+public class Universe extends JPanel {
 
     Random random;
     public boolean[][] previousGeneration;
     public int currentNumberOfGenerations = 0;
+    public int aliveCounter;
 
     public Universe(int sizeOfArray) {
         random = new Random();
@@ -31,9 +34,9 @@ public class Universe {
         }
     }
 
-    public void generateGame(int numberOfGenerations) throws InterruptedException {
+    public void generateGame() throws InterruptedException {
 
-        for (int i = 0; i < numberOfGenerations; i++) {
+        //for (int i = 0; i < numberOfGenerations; i++) {
             currentNumberOfGenerations++;
             Generations.nextGeneration(previousGeneration);
             previousGeneration = Generations.updatedGeneration.clone();
@@ -42,10 +45,10 @@ public class Universe {
             System.out.println("Alive: " + numberAlive(previousGeneration));
             printUniverse(previousGeneration);
             Thread.sleep(500);
-        }
+      //  }
     }
 
-    public int numberAlive(boolean[][] generationArray) {
+    public static int numberAlive(boolean[][] generationArray) {
         int totalAlive = 0;
         for (boolean[] array : generationArray) {
             for (boolean element : array) {
@@ -65,6 +68,26 @@ public class Universe {
             else
                 Runtime.getRuntime().exec("clear");
         } catch (IOException | InterruptedException ex) {}
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Color gColor = g.getColor();
+        for (int i = 0; i < previousGeneration.length; i++) {
+            for (int j = 0; j < previousGeneration[i].length; j++) {
+                if (previousGeneration[i][j]) {
+                    g.setColor(Color.red);
+                    g.fillRect(j * 15, i * 15, 15, 15);
+                }
+                if (previousGeneration[i][j]) {
+                    g.setColor(Color.black);
+                    g.drawRect(j * 15, i * 15, 15, 15);
+                }
+            }
+        }
+
+        g.setColor(gColor);
     }
 
 }
