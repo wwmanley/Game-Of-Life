@@ -12,13 +12,40 @@ public class GameOfLife extends JFrame {
 
     JLabel generationLabel;
     JLabel aliveLabel;
+    Timer timer;
+    Universe universe = new Universe(10);
+
 
     public GameOfLife() {
         super("Game of Life");
-        Universe universe = new Universe(10);
 
         generationLabel = new JLabel();
         aliveLabel = new JLabel();
+
+
+        JToggleButton pauseButton = new JToggleButton("Pause");
+        pauseButton.setName("Pause");
+        pauseButton.addActionListener(e -> {
+            if (timer.isRunning()) {
+                timer.stop();
+            } else {
+                timer.start();
+            }
+        });
+        add(pauseButton);
+
+        JButton reset = new JButton("Reset");
+        reset.setName("Reset");
+        reset.addActionListener(e -> {
+            universe = new Universe(10);
+            try {
+                universe.generateGame();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            universe.repaint();
+        });
+        add(reset);
 
 
         generationLabel.setBounds(40, 20, 60, 30);
@@ -37,18 +64,16 @@ public class GameOfLife extends JFrame {
         setSize(320, 380);
         setVisible(true);
 
-        new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    universe.generateGame();
-                    universe.repaint();
-                    generationLabel.setText("Generation # " + universe.currentNumberOfGenerations);
-                    aliveLabel.setText("Alive: " + universe.numberAlive(universe.previousGeneration));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        timer = new Timer(100, actionEvent -> {
+            try {
+                universe.generateGame();
+                universe.repaint();
+                generationLabel.setText("Generation # " + universe.currentNumberOfGenerations);
+                aliveLabel.setText("Alive: " + universe.numberAlive(universe.previousGeneration));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }).start();
+        });
+        timer.start();
     }
 }
