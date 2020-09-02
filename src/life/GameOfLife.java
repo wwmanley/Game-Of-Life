@@ -24,7 +24,7 @@ public class GameOfLife extends JFrame {
 
 
         JToggleButton pauseButton = new JToggleButton("Pause");
-        pauseButton.setName("Pause");
+        pauseButton.setName("PlayToggleButton");
         pauseButton.addActionListener(e -> {
             if (timer.isRunning()) {
                 timer.stop();
@@ -35,15 +35,11 @@ public class GameOfLife extends JFrame {
         add(pauseButton);
 
         JButton reset = new JButton("Reset");
-        reset.setName("Reset");
+        reset.setName("ResetButton");
         reset.addActionListener(e -> {
+            getContentPane().remove(universe);
             universe = new Universe(10);
-            try {
-                universe.generateGame();
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            universe.repaint();
+            timer.restart();
         });
         add(reset);
 
@@ -55,7 +51,6 @@ public class GameOfLife extends JFrame {
 
         add(generationLabel);
         add(aliveLabel);
-        getContentPane().add(universe);
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -65,6 +60,7 @@ public class GameOfLife extends JFrame {
         setVisible(true);
 
         timer = new Timer(100, actionEvent -> {
+            getContentPane().add(universe);
             try {
                 universe.generateGame();
                 universe.repaint();
