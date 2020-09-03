@@ -5,7 +5,7 @@ This project is an assignment from [Hyperskill](https://hyperskill.org/projects/
 
 ![Gif of program running](https://i.imgur.com/7J2dE29.gif)
 
-# Installation
+## Installation
 
 1. Navigate to where you want to install the project
 2. ``` git clone https://github.com/wwmanley/Game-Of-Life ```
