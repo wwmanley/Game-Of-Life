@@ -1,7 +1,17 @@
 # Game Of Life
-This project is an assignment from [Hyperskill](https://hyperskill.org/projects/54). The program simulates John Conway's [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) with a GUI that was made with Swing. With this particular simulation, we will be working with a 10x10 grid, or "universe". The following gif is what the final product looks like:
+This project is an assignment from [Hyperskill](https://hyperskill.org/projects/54). The program simulates John Conway's [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) with a GUI that was made with Swing. With this particular simulation, we will be working with a 10x10 grid, or "universe".
+
+## Demo
 
 ![Gif of program running](https://i.imgur.com/7J2dE29.gif)
+
+# Installation
+
+1. Navigate to where you want to install the project
+2. ``` git clone https://github.com/wwmanley/Game-Of-Life ```
+3. Navigate into the src folder
+4. ``` javac life/Main.java life/GameOfLife.java life/Universe.java life/Generations.java ```
+5. ``` java life/Main ```
 
 ## Rules
 
